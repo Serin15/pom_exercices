@@ -3,10 +3,18 @@ from selenium import webdriver
 
 class Browser:
 
-    driver = webdriver.Chrome()
-    driver.maximize_window()
-    driver.implicitly_wait(3)
+
+    def __init__(self):
+        self.driver = None
+
+    def get_driver(self):
+        if self.driver is None:
+            self.driver = webdriver.Chrome()
+            self.driver.maximize_window()
+            self.driver.implicitly_wait(3)
+        return self.driver
 
     def close_browser(self):
-        self.driver.quit()
-
+        if self.driver:
+            self.driver.quit()
+            self.driver = None
